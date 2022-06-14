@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+const Login = React.lazy(() => import("./pages/login"));
+const Admin = React.lazy(() => import("./pages/Admin"));
+const Store1 = React.lazy(() => import("./pages/Store1"));
+const Store2 = React.lazy(() => import("./pages/Store2"));
+const Home = React.lazy(() => import("./pages/Home"));
+const Error = React.lazy(() => import("./pages/Error"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/store1" element={<Store1 />} />
+      <Route path="/store2" element={<Store2 />} />
+      <Route path="*" element={<Error />} />
+    </Routes>
   );
 }
 

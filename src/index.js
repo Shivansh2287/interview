@@ -1,13 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import Loader from "./pages/Loader";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { AnimatePresence } from "framer-motion";
+import theme from "./theme";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider resetCSS theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <BrowserRouter>
+        <AnimatePresence exitBeforeEnter>
+          <Suspense fallback={<Loader />}>
+            <App />
+          </Suspense>
+        </AnimatePresence>
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>
 );
 
